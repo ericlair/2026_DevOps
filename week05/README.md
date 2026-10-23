@@ -12,7 +12,6 @@ Docker로 nginx 컨테이너를 띄워 보고, 컨테이너 안에 들어가 파
 ## 2. 이미지와 컨테이너
 이미지는 읽기 전용 템플릿(붕어빵 틀), 컨테이너는 그 이미지로 만든 실행 인스턴스(붕어빵)다. 이미지 하나로 컨테이너를 여러 개 만들 수 있다. 레지스트리(Docker Hub, ghcr.io)는 이미지를 저장하고 공유하는 곳이다.
 
-[여기에 캡처: `docker --version`, `docker run hello-world`]
 
 ## 3. nginx 실습
 ```bash
@@ -23,7 +22,6 @@ docker run -d -p 8080:80 --name web nginx
 - 컨테이너 안의 포트는 모두 80이어도 컨테이너마다 네트워크가 격리되어 있어서 충돌하지 않는다. 다만 호스트 쪽 포트(8080, 8081…)는 서로 달라야 한다.
 - 이미 쓰는 포트나 이름으로 다시 만들면 `port is already allocated`, `container name is already in use` 오류가 난다.
 
-[여기에 캡처: 브라우저 localhost:8080, `curl -I` 결과, `docker ps` 결과]
 
 ## 4. 자주 쓴 명령어
 | 명령어 | 의미 |
@@ -39,22 +37,18 @@ docker run -d -p 8080:80 --name web nginx
 ## 5. 컨테이너를 지우면 수정 내용도 사라진다
 `docker exec`로 들어가 `index.html`을 `<h1>Hi</h1>`로 바꾸면 브라우저에 Hi가 나온다. 그런데 컨테이너를 지우고 같은 이미지로 다시 만들면 원래의 nginx 환영 페이지로 돌아온다. 변경 내용은 컨테이너의 쓰기 계층에만 있었고, 이미지는 그대로이기 때문이다.
 
-[여기에 캡처: Hi 화면, 삭제 후 원래 화면]
 
 ## 6. 서로 다른 파이썬 버전
 `docker run --rm python:3.9-slim python --version`처럼 호스트에 설치하지 않고도 버전을 바꿔 가며 실행했다. `match-case`는 3.10부터 지원돼서 3.9에서는 SyntaxError, 3.12에서는 정상 실행됐다.
 
-[여기에 캡처: 3.9와 3.12 결과 비교]
 
 ## 7. GitHub Issue로 관리하기
 흐름은 Issue(무엇을, 왜) → Branch(안전한 작업 공간) → 기록 → Commit/Push → PR → Merge → Issue 자동 종료다. 이슈에 완료 조건을 체크박스로 적고, PR 본문에 `Close #이슈번호`를 쓰면 병합될 때 이슈가 자동으로 닫힌다.
 
-[여기에 캡처: 이슈 체크박스 화면, PR, 닫힌 이슈]
 
 ## 8. 혼자서 해보기
 nginx 컨테이너 3개(nginx1~3, 포트 8091~8093)를 띄우고, 각각 `index.html`을 다르게 고쳐서 구분되게 만들었다.
 
-[여기에 캡처: 세 페이지 화면, `docker ps` — week05/images/에 저장]
 
 `curl` 결과:
 ```

@@ -21,7 +21,6 @@
 - `tar -tzf`로 내용을 보고, `tar -xzf -C restore-check`로 풀어서 `diff -rq`로 원본과 같은지 비교했다. 종료 코드 0이면 같은 것이다.
 - 백업 결과물은 `.gitignore`에 넣어 Git에 올리지 않았다.
 
-[여기에 캡처: backup.sh 실행 결과, diff 결과]
 
 ## 4. Git 협업 흐름
 ```bash
@@ -35,7 +34,6 @@ git switch main && git pull --ff-only
 - 브랜치는 main이 망가지지 않게 따로 작업하는 공간이고, PR은 합치기 전에 검토를 받는 요청이다.
 - 병합 방식은 세 가지다. `--merge`는 커밋을 유지하고 병합 커밋을 만들고, `--squash`는 여러 커밋을 하나로 합치고, `--rebase`는 커밋을 main 뒤에 일렬로 붙인다.
 
-[여기에 캡처: PR 화면, Merge 후 화면]
 
 ## 5. Conflict
 같은 줄을 main과 fix/message 브랜치에서 서로 다르게 고쳐서 일부러 충돌을 만들었다. Git이 망가진 게 아니라 어느 쪽을 남길지 사람이 정하라는 신호다.
@@ -48,7 +46,6 @@ echo "로그 기록"
 ```
 해결은 표시 줄 세 개를 지우고 남길 내용만 편집한 뒤 `add → commit → push → PR 병합` 순서로 한다.
 
-[여기에 캡처: 충돌 표시 화면, 해결 후 Merge 성공 화면]
 
 ## 6. main 브랜치 보호
 Settings > Rulesets에서 "Require a pull request before merging"을 켜면 main에 직접 push할 때 `GH006: Protected branch update failed` 오류가 난다. (비공개 저장소는 유료 플랜이 필요할 수 있다)
@@ -60,7 +57,6 @@ Settings > Rulesets에서 "Require a pull request before merging"을 켜면 main
 - ping이 실패해도 서버가 죽은 게 아닐 수 있다. 방화벽이 ICMP를 막는 경우가 많다.
 - `python3 -m http.server 8080`을 두 번 띄우면 `Address already in use`, 즉 포트 충돌이 난다. 다른 포트를 쓰거나 `ss -tlnp | grep 8080`으로 PID를 찾아 `kill`한다.
 
-[여기에 캡처: `ss -tlnp | grep 8080`, 포트 충돌 오류 화면]
 
 ## 느낀 점 / 막혔던 점
 거의 이론으로 접하던 네트워크 관련 실습이라, 다른 과목 프로젝트에서 서버가 어떻게 응답을 받는지 알아볼 수 있었던 점이 좋았다.

@@ -12,7 +12,6 @@ Ollama로 작은 AI 모델(qwen3:0.6b)을 내 컴퓨터에 띄우고, 파이썬 
 - Ollama는 모델을 실행하고 관리하는 서버, Qwen은 답변을 만드는 모델이다.
 - 모델은 Ollama가 따로 보관하니 레포에 복사하거나 push하지 않는다.
 
-[여기에 캡처: `ollama list`, 브라우저에서 질문과 답변 화면]
 
 ## start.sh 만들기
 ```bash
@@ -34,7 +33,6 @@ exec python3 chat.py
 ## 실행 권한 문제
 처음 `./start.sh`를 실행하면 `Permission denied`가 나온다. `ls -l`로 보면 실행(x) 권한이 없어서이고, `chmod u+x start.sh`로 해결했다. 그냥 `start.sh`로 실행이 안 되는 건 PATH에 없는 파일이라서 `./`를 붙여야 한다.
 
-[여기에 캡처: Permission denied 후 chmod로 해결한 화면]
 
 ## 환경 변수와 조건문
 ```bash
